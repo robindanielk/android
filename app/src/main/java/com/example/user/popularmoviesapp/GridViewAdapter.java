@@ -1,79 +1,90 @@
 package com.example.user.popularmoviesapp;
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.text.Layout;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.GregorianCalendar;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by user on 3/30/2017.
+ * Created by user on 4/4/2017.
  */
 
-public class GridViewAdapter extends ArrayAdapter<PopularMovies>
+public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.MyViewHolder>
 {
-    private static final String TAG = GridViewAdapter.class.getSimpleName();
+    private List<PopularMovies> popularMoviesList;
+    private LayoutInflater inflater;
+    private Context context;
 
-    private List<PopularMovies> list;
-
-    public GridViewAdapter(Activity context,List<PopularMovies> list)
-
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, final int viewType)
     {
-        super(context,0);
-        this.list = list;
+        View rootView = inflater.inflate(R.layout.grid_item,parent,false);
+        final MyViewHolder holder = new MyViewHolder(rootView);
+        rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Intent intent = new Intent(context,DetailsActivity.class);
+                intent.putExtra("moviesPosition",popularMoviesList.get(position));
+                context.startActivity(intent);
+            }
+        });
+        return holder;
     }
 
-    public void updateMovies(List<PopularMovies> list)
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position)
     {
-        this.list = list;
+        PopularMovies pmovies = popularMoviesList.get(position);
+        Picasso.with(context).load(pmovies.getMovieImage()).into(holder.image);
+        holder.originalTitle.setText(pmovies.getOriginalTitle());
+
+    }
+
+    @Override
+    public int getItemCount() {
+        if(null == popularMoviesList){
+            return 0;
+        }
+        return popularMoviesList.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder
+    {
+        public ImageView image;
+        public TextView originalTitle;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            originalTitle = (TextView) itemView.findViewById(R.id.gv_tv_original_title);
+            image = (ImageView) itemView.findViewById(R.id.gv_image);
+        }
+    }
+
+    public GridViewAdapter(Context context)
+    {
+        this.context = context;
+        this.inflater = LayoutInflater.from(context);
+    }
+
+    public void setMovieList(List<PopularMovies> updatedPopularMoviesList)
+    {
+        this.popularMoviesList = new ArrayList<>();
+        this.popularMoviesList.addAll(updatedPopularMoviesList);
         notifyDataSetChanged();
     }
 
-    /*Adapter for inflating the grid item view*/
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View rootView = convertView;
-        MyViewHolder viewHolder = null;
-        if(rootView == null)
-        {
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            rootView = inflater.inflate(R.layout.grid_item,parent,false);
-            viewHolder = new MyViewHolder(rootView);
-            rootView.setTag(viewHolder);
-        }else
-        {
-           viewHolder = (MyViewHolder) rootView.getTag();
-        }
-        PopularMovies currentMovie = getItem(position);
 
-        Picasso.with(getContext()).load(currentMovie.getMovieImage())
-                .into(viewHolder.mPosterImage);
-        viewHolder.mOriginalTitle.setText(currentMovie.getOriginalTitle());
-
-        return rootView;
-    }
-
-    private class MyViewHolder
-    {
-         public TextView mOriginalTitle;
-         public ImageView mPosterImage;
-        public MyViewHolder(View v)
-        {
-            mOriginalTitle = (TextView) v.findViewById(R.id.gv_tv_original_title);
-            mPosterImage = (ImageView) v.findViewById(R.id.gv_image);
-        }
-    }
 }

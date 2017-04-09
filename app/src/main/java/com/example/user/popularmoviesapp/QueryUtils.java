@@ -144,8 +144,9 @@ public final class QueryUtils
                String releaseDate = currentResults.getString("release_date");
                String originalTitle = currentResults.getString("title");
                double voteAverage = currentResults.getDouble("vote_average");
+               String backDropPath = POSTER_PATH+currentResults.getString("backdrop_path");
 
-               popularMoviesList.add(new PopularMovies(originalTitle,posterPath,overVIew,voteAverage,releaseDate));
+               popularMoviesList.add(new PopularMovies(originalTitle,posterPath,overVIew,voteAverage,releaseDate,backDropPath));
            }
        }catch (JSONException e){Log.e(TAG,"Error parsing the Json response");}
        return popularMoviesList;
