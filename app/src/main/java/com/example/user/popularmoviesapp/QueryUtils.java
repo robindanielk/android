@@ -30,7 +30,7 @@ public final class QueryUtils
 {
     private static final String TAG = QueryUtils.class.getSimpleName();
     /*Poster path url for relative appending during parsing*/
-    private static final String POSTER_PATH = "https://image.tmdb.org/t/p/w185/";
+    private static final String POSTER_PATH = "https://image.tmdb.org/t/p/w500/";
     /*Return a list of <PopularMovies> that has been built upon from parsing a
     *JSON response */
    public static List<PopularMovies> extractPopularMovies(String requestUrl)

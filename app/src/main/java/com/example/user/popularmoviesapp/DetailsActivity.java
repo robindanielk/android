@@ -31,7 +31,7 @@ public class DetailsActivity extends AppCompatActivity
     private static final String MOVIE_POSITION = "moviesPosition";
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details_activity);
         if(getIntent() != null) {
@@ -72,4 +72,5 @@ public class DetailsActivity extends AppCompatActivity
         });
 
     }
+
 }

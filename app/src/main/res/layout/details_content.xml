@@ -15,19 +15,20 @@
         android:padding="16dp">
 
         <TextView
-            android:layout_marginTop="16dp"
             android:id="@+id/details_tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:gravity="center"
-            android:textSize="?android:textAppearanceLarge"
+            android:textSize="32sp"
+            android:textAllCaps="true"
             android:textStyle="bold" />
 
 
         <LinearLayout
-            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -43,10 +44,11 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Release Date"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:paddingTop="8dp"
                     android:id="@+id/details_tv_release_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -67,10 +69,12 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Rating"
+                    android:textSize="24sp"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:paddingTop="8dp"
                     android:id="@+id/details_tv_ratings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -81,28 +85,28 @@
 
 
         <TextView
-            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:padding="8dp"
             android:text="Overview"
-            android:textAppearance="?android:textAppearanceMedium"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
-            android:layout_marginTop="8dp"
             android:id="@+id/details_tv_overview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
             android:padding="8dp"
             android:textAppearance="?android:textAppearanceMedium" />
 
 
         <ImageView
-            android:layout_marginTop="16dp"
             android:id="@+id/details_cv_movie_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
             android:padding="8dp"
             android:scaleType="centerCrop"/>
 
