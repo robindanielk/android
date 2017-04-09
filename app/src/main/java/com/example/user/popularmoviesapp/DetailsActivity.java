@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,9 +34,10 @@ public class DetailsActivity extends AppCompatActivity
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details_activity);
-        if(getIntent().hasExtra(MOVIE_POSITION))
-        {
-            pMovies = getIntent().getParcelableExtra(MOVIE_POSITION);
+        if(getIntent() != null) {
+            if (getIntent().hasExtra(MOVIE_POSITION)) {
+                pMovies = getIntent().getParcelableExtra(MOVIE_POSITION);
+            }
         }else
         {
             throw new IllegalArgumentException("Invalid position recieved to DetailsActivity");
@@ -59,6 +62,15 @@ public class DetailsActivity extends AppCompatActivity
 
         Picasso.with(this).load(pMovies.getBackDropImageUrl()).into(movieBackDrop);
         Picasso.with(this).load(pMovies.getMovieImage()).into(moviePoster);
+
+        FloatingActionButton flbShare = (FloatingActionButton) findViewById(R.id.details_fab_share);
+        flbShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
 
     }
 }
