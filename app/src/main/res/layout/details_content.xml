@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,9 +21,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
+            android:fontFamily="sans-serif-condensed"
             android:textSize="32sp"
             android:textAllCaps="true"
             android:textStyle="bold" />
+        
+        <View
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#bdbdbd"/>
 
 
         <LinearLayout
@@ -43,9 +51,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Release Date"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:text="@string/details_release_date"
+                    android:fontFamily="monospace"
+
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"/>
 
                 <TextView
                     android:paddingTop="8dp"
@@ -68,10 +79,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Rating"
-                    android:textSize="24sp"
+                    android:text="@string/details_rating"
+                    android:textSize="20sp"
+                    android:fontFamily="monospace"
                     android:textAppearance="?android:textAppearanceMedium"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textAllCaps="true"/>
 
                 <TextView
                     android:paddingTop="8dp"
@@ -83,15 +96,22 @@
             </LinearLayout>
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#bdbdbd"/>
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:padding="8dp"
-            android:text="Overview"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:text="@string/details_overview"
+            android:textSize="20sp"
+            android:fontFamily="monospace"
+            android:textStyle="bold"
+            android:textAllCaps="true"/>
 
         <TextView
             android:id="@+id/details_tv_overview"
