@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">PopularMoviesApp</string>
+    <!--Main activity Strings-->
+    <string name="movie_api">73c0644c92763ce7863dcc4fb6592334</string>
+    <string name="sort_by_revenue_default">revenue.desc</string>
+    <string name="sort_by_vote_average">vote_average.desc</string>
+    <string name="sort_by_popularity">popularity.desc</string>
+    <string name="no_current_movies">No Movies Currently found!!</string>
+    <string name="no_internet_connection">No internet Connection</string>
+
+    <!--Details Activity-->
+    <string name="details_overview">overview</string>
+    <string name="details_release_date">release date</string>
+    <string name="details_rating">rating</string>
 </resources>

@@ -1,10 +1,12 @@
 package com.example.user.popularmoviesapp;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -28,14 +30,24 @@ public class MainActivity extends AppCompatActivity {
     private Boolean isConnected;
     private GridViewAdapter gridViewAdapter;
 
+    private Resources res;
+
+
     private static final String MOVIE_BASE_URI = "https://api.themoviedb.org/3/discover/movie";
-    private static final String API_KEY = "73c0644c92763ce7863dcc4fb6592334";
-    private static final String DEFAULT_SORT_BY = "revenue.desc";
+    private String API_KEY ;
+    private String DEFAULT_SORT_BY ;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        res = getResources();
+        API_KEY = res.getString(R.string.movie_api);
+        DEFAULT_SORT_BY = res.getString(R.string.sort_by_revenue_default);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
 
@@ -89,13 +101,13 @@ public class MainActivity extends AppCompatActivity {
                     {
                         gridViewAdapter.setMovieList(popularMovies);
                     } else {
-                        mEmptyView.setText("No Movies Currently found!!");
+                        mEmptyView.setText(res.getString(R.string.no_current_movies));
                     }
                 }
             }.execute(sortBy);
         }else
         {
-            mEmptyView.setText("No internet Connection");
+            mEmptyView.setText(res.getString(R.string.no_internet_connection));
         }
 
     }
@@ -114,13 +126,13 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId())
         {
             case R.id.menu_popular:
-                sortByOptions("popularity.desc");
+                sortByOptions(res.getString(R.string.sort_by_popularity));
                 return true;
             case R.id.menu_top_rated:
-                sortByOptions("vote_average.desc");
+                sortByOptions(res.getString(R.string.sort_by_vote_average));
                 return true;
             case R.id.menu_highest_revenue:
-                sortByOptions("revenue.desc");
+                sortByOptions(res.getString(R.string.sort_by_revenue_default));
                 return true;
             default:
                 Log.e(TAG,"Error in sortByString method call");
