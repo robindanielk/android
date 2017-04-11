@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Resources res;
 
+    private ArrayList<PopularMovies> popularMoviesArrayList;
+    private static final String POPULAR_MOVIES_KEY = "key";
+
 
     private static final String MOVIE_BASE_URI = "https://api.themoviedb.org/3/discover/movie";
     private String API_KEY ;
@@ -43,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(savedInstanceState != null)
+        {
+            popularMoviesArrayList = savedInstanceState.getParcelableArrayList(POPULAR_MOVIES_KEY);
+
+        }
 
         res = getResources();
         API_KEY = res.getString(R.string.movie_api);
@@ -99,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     mLoaderIndicator.setVisibility(View.GONE);
                     if (popularMovies != null)
                     {
-                        gridViewAdapter.setMovieList(popularMovies);
+                        setArrayValues(popularMovies);
                     } else {
                         mEmptyView.setText(res.getString(R.string.no_current_movies));
                     }
@@ -138,5 +148,20 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG,"Error in sortByString method call");
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void setArrayValues(List<PopularMovies> popularMovies)
+    {
+        for(PopularMovies pMovies:popularMovies)
+        {
+            popularMoviesArrayList.add(pMovies);
+            gridViewAdapter.setMovieList(popularMoviesArrayList);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(POPULAR_MOVIES_KEY,popularMoviesArrayList);
     }
 }
