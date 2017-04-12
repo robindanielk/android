@@ -48,7 +48,12 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position)
     {
         PopularMovies pmovies = popularMoviesList.get(position);
-        Picasso.with(context).load(pmovies.getMovieImage()).into(holder.image);
+
+        Picasso.with(context).load(pmovies.getMovieImage()).error(R.drawable.no_movie_image).
+                into(holder.image);
+
+
+
         holder.originalTitle.setText(pmovies.getOriginalTitle());
 
     }

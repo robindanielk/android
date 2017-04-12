@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Resources res;
 
-    private ArrayList<PopularMovies> popularMoviesArrayList;
+    private ArrayList<PopularMovies> popularMoviesArrayList = new ArrayList<>();
     private static final String POPULAR_MOVIES_KEY = "key";
 
 
@@ -136,12 +136,15 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId())
         {
             case R.id.menu_popular:
+                popularMoviesArrayList.clear();
                 sortByOptions(res.getString(R.string.sort_by_popularity));
                 return true;
             case R.id.menu_top_rated:
+                popularMoviesArrayList.clear();
                 sortByOptions(res.getString(R.string.sort_by_vote_average));
                 return true;
             case R.id.menu_highest_revenue:
+                popularMoviesArrayList.clear();
                 sortByOptions(res.getString(R.string.sort_by_revenue_default));
                 return true;
             default:
@@ -155,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
         for(PopularMovies pMovies:popularMovies)
         {
             popularMoviesArrayList.add(pMovies);
-            gridViewAdapter.setMovieList(popularMoviesArrayList);
         }
+        gridViewAdapter.setMovieList(popularMoviesArrayList);
     }
 
     @Override
