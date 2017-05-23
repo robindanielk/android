@@ -14,6 +14,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.BindViews;
+import butterknife.ButterKnife;
+
 /**
  * Created by user on 3/30/2017.
  */
@@ -21,12 +25,12 @@ import com.squareup.picasso.Picasso;
 public class DetailsActivity extends AppCompatActivity
 {
     private PopularMovies pMovies;
-    private TextView moviesTitle;
-    private TextView moviesOverview;
-    private ImageView moviePoster;
-    private ImageView movieBackDrop;
-    private TextView moviesReleaseDate;
-    private TextView moviesVoteAverage;
+    @BindView(R2.id.details_tv_title) TextView moviesTitle;
+    @BindView(R2.id.details_tv_overview) TextView moviesOverview;
+    @BindView(R2.id.details_cv_movie_image) ImageView moviePoster;
+    @BindView(R2.id.details_ct_back_drop) ImageView movieBackDrop;
+    @BindView(R2.id.details_tv_release_date) TextView moviesReleaseDate;
+    @BindView(R2.id.details_tv_ratings) TextView moviesVoteAverage;
 
     private static final String MOVIE_POSITION = "moviesPosition";
 
@@ -34,6 +38,7 @@ public class DetailsActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details_activity);
+        ButterKnife.bind(this);
         if(getIntent() != null) {
             if (getIntent().hasExtra(MOVIE_POSITION)) {
                 pMovies = getIntent().getParcelableExtra(MOVIE_POSITION);
@@ -47,13 +52,6 @@ public class DetailsActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.details_collapsing_toolbar);
         toolbarLayout.setTitle(pMovies.getOriginalTitle());
-
-        movieBackDrop = (ImageView) findViewById(R.id.details_ct_back_drop);
-        moviesTitle = (TextView) findViewById(R.id.details_tv_title);
-        moviesOverview = (TextView) findViewById(R.id.details_tv_overview);
-        moviePoster = (ImageView) findViewById(R.id.details_cv_movie_image);
-        moviesReleaseDate = (TextView) findViewById(R.id.details_tv_release_date);
-        moviesVoteAverage = (TextView) findViewById(R.id.details_tv_ratings);
 
         moviesTitle.setText(pMovies.getOriginalTitle());
         moviesOverview.setText(pMovies.getOverview());
